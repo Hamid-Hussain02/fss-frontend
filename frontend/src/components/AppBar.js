@@ -7,6 +7,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+
+import Link from "@mui/material/Link";
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -38,31 +41,99 @@ export default function ElevateAppBar(props) {
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar sx={{ backgroundColor: "lightseagreen" }}>
-          <Toolbar>
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold" }}
-              component="div"
-            >
-              Foody.pk
-            </Typography>
+        <AppBar sx={{ backgroundColor: "#c8a97e", color: "black" }}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box>
+              <Box>
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: "bold" }}
+                  component="div"
+                >
+                  Foody.pk
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "row", pr: "40px" }}>
+              <Typography
+                gutterBottom
+                variant="p"
+                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                component="div"
+              >
+                Home
+              </Typography>
+
+              <Link
+                gutterBottom
+                variant="p"
+                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                component="div"
+                to="home/payments"
+              >
+                Payments
+              </Link>
+              <Link
+                to="home/payments"
+                variant="subtitle1"
+                color="text.secondary"
+              >
+                Payments
+              </Link>
+              <Typography
+                gutterBottom
+                variant="p"
+                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                component="div"
+              >
+                Login
+              </Typography>
+
+              <Typography
+                gutterBottom
+                variant="p"
+                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                component="div"
+              >
+                Admin
+              </Typography>
+
+              <Typography
+                gutterBottom
+                variant="p"
+                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                component="div"
+              >
+                About Us
+              </Typography>
+
+              {/* <Button variant="outlined">Login</Button> */}
+              {/* <Typography gutterBottom variant="h5" component="div">
+                Login
+              </Typography> */}
+              {/* <Typography
+                gutterBottom
+                variant="h5"
+                sx={{ mx: "20px" }}
+                component="div"
+              >
+                Login
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                Login
+              </Typography> */}
+            </Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
       <Toolbar />
-      <Container>
-        {/* <Box sx={{ my: 2 }}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-            )
-            .join("\n")}
-        </Box> */}
-      </Container>
+      <Container></Container>
     </React.Fragment>
   );
 }

@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import SingUp from "./pages/SignUp";
 import Home from "./pages/Home";
 // import Banner from "./components/Banner";
+import Payments from "./components/payments";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/signup" element={<SingUp />} />
           <Route path="/home" element={<Home />}>
             {/* <Route path="banner" element={<Banner />} /> */}
+            <Route path="payments" element={<Payments />} />
           </Route>
         </Routes>
       </Router>

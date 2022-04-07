@@ -1,5 +1,5 @@
 import React from "react";
-import BannerImg from "../assets/images/banner-5.jpeg";
+import BannerImg from "../assets/images/banner-1.jpeg";
 
 const Banner = () => {
   return (
@@ -11,13 +11,13 @@ const Banner = () => {
           <h1
             style={{
               margin: "auto",
-              color: "lightseagreen",
+              color: "#c8a97e",
               fontSize: "100px",
             }}
           >
             Foody.pk
           </h1>
-          <h4 style={{ color: "lightseagreen" }}>
+          <h4 style={{ color: "#c8a97e" }}>
             “You don’t need a silver fork to eat good food.” – Paul Prudhomme
           </h4>
         </div>
