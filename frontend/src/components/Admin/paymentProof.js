@@ -77,7 +77,7 @@ export default function CustomizedDialogs(props) {
           Modal title
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <img src={props.image}></img>
+          <img src={props.image} all="Payment Proof"></img>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
