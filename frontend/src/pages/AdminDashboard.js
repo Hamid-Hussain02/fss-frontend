@@ -93,7 +93,7 @@ const routes = [
   },
   {
     text: "Upload Menu",
-    route: "/admin-dashboard/all-clients",
+    route: "/admin-dashboard/upload-menu",
   },
   {
     text: "Manage Payments",
@@ -101,7 +101,7 @@ const routes = [
   },
   {
     text: "Daily Clients",
-    route: "/admin-dashboard/all-clients",
+    route: "/admin-dashboard/daily-clients",
   },
 ];
 
@@ -158,7 +158,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List sx={{ mt: "80px" }}>
           {routes.map((route, index) => (
             <ListItemButton
               key={route.text}
@@ -166,6 +166,8 @@ export default function MiniDrawer() {
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
+                my: "20px",
+                color: "white",
               }}
               onClick={() => navigate(route.route)}
             >
@@ -174,6 +176,7 @@ export default function MiniDrawer() {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
+                  color: "white",
                 }}
               >
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

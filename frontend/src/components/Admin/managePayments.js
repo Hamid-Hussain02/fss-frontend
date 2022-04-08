@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllInvoices } from "../../store/slices/managePayments-slice";
 import PaymentProof from "./paymentProof";
+import Chip from "@mui/material/Chip";
 
 import Button from "@mui/material/Button";
 
@@ -70,6 +71,14 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const getColor = (value) => {
+    console.log(value);
+    return value == "Approved"
+      ? "success"
+      : value == "Rejected"
+      ? "error"
+      : "warning";
+  };
 
   useEffect(() => {
     dispatch(getAllInvoices());
@@ -102,7 +111,21 @@ export default function StickyHeadTable() {
                       const value = invoice[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.showProof ? column.showProof(value) : value}
+                          {column.showProof ? (
+                            column.showProof(value)
+                          ) : column.label == "Payment Status" ? (
+                            // <Button
+                            //   variant="outlined"
+                            //   size="small"
+                            //   color={getColor(value)}
+                            // >
+                            //   {value}
+                            // </Button>
+
+                            <Chip label={value} color={getColor(value)} />
+                          ) : (
+                            value
+                          )}
                         </TableCell>
                       );
                     })}
@@ -115,7 +138,7 @@ export default function StickyHeadTable() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={invoices.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

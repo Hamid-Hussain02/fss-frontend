@@ -10,6 +10,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AllClients from "./components/Admin/allClients";
 import AdminLogin from "./components/Admin/adminLogin";
 import ManagePayments from "./components/Admin/managePayments";
+import UploadMenu from "./components/Admin/uploadMenu";
+
+import DailyClients from "./components/Admin/dailyClients";
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />}>
             <Route path="all-clients" element={<AllClients />} />
             <Route path="manage-payments" element={<ManagePayments />} />
+            <Route path="upload-menu" element={<UploadMenu />} />
+            <Route path="daily-clients" element={<DailyClients />} />
           </Route>
           <Route path="admin-login" element={<AdminLogin />} />
         </Routes>
