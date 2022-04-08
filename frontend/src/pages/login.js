@@ -17,30 +17,31 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { useDispatch, useSelector } from 'react-redux';
-// import { loginAsync } from '../store/slices/login-slice';
 import { useNavigate } from "react-router-dom";
-// import { getLoginResponse } from '../store/slices/login-slice';
 
 import { flexbox } from "@mui/system";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import btnTheme from "../Themes/clientSideThemes";
+import classes from "./login.module.css";
+import AppBar from "../components/AppBar";
+import Footer from "../components/common/Footer";
 
-// import { useForm } from 'react-hook-form'
-
-// const theme = createTheme();
+// const theme = createTheme({
+//   components: {
+//     MuiButton: {
+//       styleOverrides: {
+//         root: {
+//           fontSize: "1rem",
+//         },
+//       },
+//     },
+//   },
+// });
 
 const Login = () => {
-  //   const dispatch= useDispatch()
-  //   const navigate =useNavigate();
-  //   const {loginResponse} = useSelector((state)=>state.login)
-  //   const {user} = useSelector((state)=>state.login)
-  //   console.log(loginResponse,user, useSelector((state)=>state.login))
-  //   const {register, handleSubmit,error  }=useForm()
-
   const validationSchema = yup.object({
     email: yup
       .string("Enter your email")
@@ -88,85 +89,116 @@ const Login = () => {
     //   <ThemeProvider  theme={theme}>
     // <Container component="main" maxWidth="xs">
     //   <CssBaseline />
-
-    <Box
-      sx={{
-        marginTop: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Card>
-        <CardContent sx={{ p: "10%" }}>
-          <Typography component="h1" variant="h5">
-            Log In
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={formik.handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-            </Box>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <ThemeProvider theme={btnTheme}>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <AppBar />
+        <Card
+          sx={{
+            bgcolor: "#ede1d4",
+            width: "600px",
+            borderRadius: "0px",
+            boxShadow: "none",
+          }}
+        >
+          <CardContent sx={{ p: "10%" }}>
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ fontWeight: "bold", my: "10px", color: "secondary" }}
             >
               Log In
-            </Button>
-            <Grid container sx={{ justifyContent: "end" }}>
-              {/* <Grid item xs>
+            </Typography>
+            <Typography
+              component="small"
+              variant="small"
+              sx={{ fontWeight: "", color: "gray" }}
+            >
+              {"Not a member yet? "}
+              <Link href="/signup" variant="" sx={{ color: "#c8a97e" }}>
+                {"Sign Up here"}
+              </Link>
+            </Typography>
+
+            <Box
+              component="form"
+              onSubmit={formik.handleSubmit}
+              noValidate
+              sx={{ mt: 1, p: "40px" }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                sx={{ py: "10px" }}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                sx={{ py: "10px", borderRadius: "0px" }}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+              />
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+              </Box>
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                sx={{ mt: 3, mb: 2 }}
+                className={classes.bgColor}
+              >
+                Log In
+              </Button>
+              <Grid container sx={{ justifyContent: "end" }}>
+                {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid> */}
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Grid item>
+                  {/* <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link> */}
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        </CardContent>
-      </Card>
-    </Box>
+            </Box>
+          </CardContent>
+        </Card>
+        <Footer />
+      </Box>
+    </ThemeProvider>
   );
 };
 

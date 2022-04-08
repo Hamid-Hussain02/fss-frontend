@@ -9,7 +9,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -61,57 +62,88 @@ export default function ElevateAppBar(props) {
               </Box>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row", pr: "40px" }}>
-              <Typography
-                gutterBottom
+              {/* <Typography
+                  gutterBottom
+                  variant="p"
+                  sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                  component="div"
+                >
+                  Home
+                </Typography> */}
+              <Link
                 variant="p"
-                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                style={{
+                  fontWeight: "bold",
+                  margin: "auto 10px auto 10px",
+                  ml: "40px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
                 component="div"
+                to="/home"
               >
                 Home
-              </Typography>
+              </Link>
 
               <Link
-                gutterBottom
                 variant="p"
-                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                style={{
+                  fontWeight: "bold",
+                  margin: "auto 10px auto 10px",
+                  ml: "40px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
                 component="div"
-                to="home/payments"
+                to="/home/payments"
               >
                 Payments
               </Link>
-              <Link
-                to="home/payments"
-                variant="subtitle1"
-                color="text.secondary"
-              >
-                Payments
-              </Link>
-              <Typography
-                gutterBottom
-                variant="p"
-                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
-                component="div"
-              >
-                Login
-              </Typography>
 
-              <Typography
-                gutterBottom
+              <Link
                 variant="p"
-                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                style={{
+                  fontWeight: "bold",
+                  margin: "auto 10px auto 10px",
+                  ml: "40px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
                 component="div"
+                to="/admin-login"
               >
                 Admin
-              </Typography>
+              </Link>
 
-              <Typography
-                gutterBottom
+              <Link
                 variant="p"
-                sx={{ fontWeight: "bold", margin: "auto", ml: "40px" }}
+                style={{
+                  fontWeight: "bold",
+                  margin: "auto 10px auto 10px",
+                  ml: "40px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
                 component="div"
+                to="/home/login"
+              >
+                Login
+              </Link>
+
+              <Link
+                variant="p"
+                style={{
+                  fontWeight: "bold",
+                  margin: "auto 10px auto 10px",
+                  ml: "40px",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+                component="div"
+                to="/home"
               >
                 About Us
-              </Typography>
+              </Link>
 
               {/* <Button variant="outlined">Login</Button> */}
               {/* <Typography gutterBottom variant="h5" component="div">

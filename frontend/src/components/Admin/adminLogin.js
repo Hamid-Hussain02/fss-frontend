@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // import Avatar from '@mui/material/Avatar';
 import Button from "@mui/material/Button";
@@ -10,19 +10,31 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
+import Typography from "@mui/material/Typography";
+import { Navigate, useNavigate } from "react-router-dom";
+
+import { flexbox } from "@mui/system";
+
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+// import btnTheme from "../Themes/clientSideThemes";
+import { login } from "../../store/slices/adminLogin-slice";
+import classes from "../../pages/login.module.css";
+import AppBar from "../../components/AppBar";
+import Footer from "../../components/common/Footer";
+import { useDispatch, useSelector } from "react-redux";
 
-const Signup = () => {
-  // const dispatch = useDispatch()
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loginResponse } = useSelector((state) => state.login);
   const validationSchema = yup.object({
     email: yup
       .string("Enter your email")
@@ -32,38 +44,38 @@ const Signup = () => {
       .string("Enter your password")
       .min(6, "Password should be of minimum 6 characters length")
       .required("Password is required"),
-    name: yup
-      .string("Enter your name")
-      .min(2, "Name should be of minimum 2 characters length")
-      .required("Name is required"),
   });
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
-      name: "",
-      role: "",
-      contact: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      const { name, email, password, role, contact } = values;
+      console.log("onsubmit");
+      const { email, password } = values;
 
-      console.log("jfldskfj");
-
-      const signupData = {
-        name,
-        role,
+      //   navigate("/admin-dashboard");
+      console.log({
         email,
         password,
-        contact,
+      });
+      const loginData = {
+        email,
+        password,
       };
 
-      // dispatch(signupAsync(signupData))
+      dispatch(login(loginData));
     },
   });
+
+  useEffect(() => {
+    // console.log(loginResponse)
+    if (loginResponse) {
+      navigate("/admin-dashboard");
+    }
+  }, [loginResponse]);
 
   return (
     <Box
@@ -72,64 +84,42 @@ const Signup = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        mt: "5%",
       }}
     >
-      <Card sx={{ maxWidth: "600px" }}>
+      <AppBar />
+      <Card
+        sx={{
+          bgcolor: "#ede1d4",
+          width: "600px",
+          borderRadius: "0px",
+          boxShadow: "none",
+        }}
+      >
         <CardContent sx={{ p: "10%" }}>
-          <Typography component="h1" variant="h5">
-            Sign Up
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{ fontWeight: "bold", my: "10px", color: "secondary" }}
+          >
+            Log In
           </Typography>
+          <Typography
+            component="small"
+            variant="small"
+            sx={{ fontWeight: "", color: "gray" }}
+          >
+            {"Not a member yet? "}
+            <Link href="/signup" variant="" sx={{ color: "#c8a97e" }}>
+              {"Sign Up here"}
+            </Link>
+          </Typography>
+
           <Box
             component="form"
             onSubmit={formik.handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, p: "40px" }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoComplete="name"
-              autoFocus
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="role"
-              label="Role"
-              name="role"
-              autoComplete="role"
-              autoFocus
-              value={formik.values.role}
-              onChange={formik.handleChange}
-              error={formik.touched.role && Boolean(formik.errors.role)}
-              helperText={formik.touched.role && formik.errors.role}
-            />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="contact"
-              label="Contact"
-              name="contact"
-              autoComplete="contact"
-              autoFocus
-              value={formik.values.contact}
-              onChange={formik.handleChange}
-              error={formik.touched.contact && Boolean(formik.errors.contact)}
-              helperText={formik.touched.contact && formik.errors.contact}
-            />
-
             <TextField
               margin="normal"
               required
@@ -139,6 +129,7 @@ const Signup = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              sx={{ py: "10px" }}
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -153,6 +144,7 @@ const Signup = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              sx={{ py: "10px", borderRadius: "0px" }}
               value={formik.values.password}
               onChange={formik.handleChange}
               error={formik.touched.password && Boolean(formik.errors.password)}
@@ -163,20 +155,17 @@ const Signup = () => {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-
-              <Box sx={{ mt: "10px" }}>
-                <Link href="/" variant="body2">
-                  {"Already have an account ? Log In"}
-                </Link>
-              </Box>
             </Box>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              color="primary"
               sx={{ mt: 3, mb: 2 }}
+              className={classes.bgColor}
             >
-              Sign Up
+              Log In
             </Button>
             <Grid container sx={{ justifyContent: "end" }}>
               {/* <Grid item xs>
@@ -185,16 +174,17 @@ const Signup = () => {
                 </Link>
               </Grid> */}
               <Grid item>
-                <Link href="/" variant="body2">
-                  {"Already have an account ? Log In"}
-                </Link>
+                {/* <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link> */}
               </Grid>
             </Grid>
           </Box>
         </CardContent>
       </Card>
+      <Footer />
     </Box>
   );
 };
 
-export default Signup;
+export default Login;

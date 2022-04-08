@@ -64,3 +64,29 @@
 .text-container {
   display: flex;
 }
+
+@media (min-width: 900px) {
+  .css-1ikt2bq-MuiContainer-root {
+    max-width: 100% !important;
+  }
+}
+
+/* .MuiTableCell-root {
+  font-weight: bold !important;
+} */
+
+.MuiTableCell-head {
+  font-weight: bold !important;
+}
+
+/* .MuiTableCell-stickyHeader {
+  font-weight: bold !important;
+} */
+
+/* .MuiTableCell-sizeMedium {
+  font-weight: bold !important;
+} */
+
+/* .css-y8ay40-MuiTableCell-root {
+  font-weight: bold !important;
+} */

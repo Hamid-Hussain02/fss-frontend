@@ -19,6 +19,7 @@ import Banner from "../components/Banner";
 import MealCard from "../components/mealCard";
 import menu from "../data/dummyData";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/common/Footer";
 
 function Copyright(props) {
   return (
@@ -152,19 +153,23 @@ function PricingContent() {
             // Enterprise card is full width at sm breakpoint
             <Grid item key={menu.day} xs={12} sm={6} md={4}>
               <MealCard menu={menu} />
-              <Outlet />
             </Grid>
           ))}
         </Grid>
+
+        <Outlet />
       </Container>
       {/* Footer */}
-      <Container
+      <Footer />
+      {/* <Container
         maxWidth="md"
         component="footer"
         sx={{
           borderTop: (theme) => `1px solid ${theme.palette.divider}`,
           mt: 8,
           py: [3, 6],
+          width: "100%",
+          backgroundColor: "#c8a97e",
         }}
       >
         <Grid container spacing={4} justifyContent="space-evenly">
@@ -186,7 +191,7 @@ function PricingContent() {
           ))}
         </Grid>
         <Copyright sx={{ mt: 5 }} />
-      </Container>
+      </Container> */}
       {/* End footer */}
     </React.Fragment>
   );
