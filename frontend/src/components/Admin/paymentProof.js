@@ -63,7 +63,7 @@ export default function CustomizedDialogs(props) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Show Prooffff
+        Show Proof
       </Button>
       <BootstrapDialog
         onClose={handleClose}
