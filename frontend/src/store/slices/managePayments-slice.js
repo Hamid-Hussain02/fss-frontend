@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { customAxios } from "../../services/auth-header";
 
-export const getAllClients = createAsyncThunk(
-  "Clients/getAllClients",
+export const getAllInvoices = createAsyncThunk(
+  "ManagePayments/getAllInvoices",
   async () => {
     console.log("loginasync");
 
     const response = await customAxios.get(
-      `${process.env.REACT_APP_BASE_URL}user/`
+      `${process.env.REACT_APP_BASE_URL}invoice/`
     );
     console.log(response);
     return response.data;
@@ -16,14 +16,14 @@ export const getAllClients = createAsyncThunk(
 );
 
 const initialState = {
-  users: [],
+  invoices: [],
   //   loginResponse: false,
   //   token: "",
   //   updateUserResponse: false,
 };
 
-const clientsSlice = createSlice({
-  name: "Clients",
+const ManagePaymentSlice = createSlice({
+  name: "ManagePayments",
   initialState,
   reducers: {
     loggedIn: (state, { payload }) => {
@@ -31,18 +31,18 @@ const clientsSlice = createSlice({
     },
   },
   extraReducers: {
-    [getAllClients.pending]: () => {
+    [getAllInvoices.pending]: () => {
       console.log("Pending");
     },
-    [getAllClients.fulfilled]: (state, { payload }) => {
+    [getAllInvoices.fulfilled]: (state, { payload }) => {
       console.log("Fetched Successfully", payload);
 
       return {
         ...state,
-        users: payload,
+        invoices: payload,
       };
     },
-    [getAllClients.rejected]: () => {
+    [getAllInvoices.rejected]: () => {
       console.log("Rejected");
     },
 
@@ -63,4 +63,4 @@ const clientsSlice = createSlice({
 
 // export const getLoginResponse = (state) => state.loginResponse;
 export const getLogedInUser = (state) => state.user;
-export default clientsSlice.reducer;
+export default ManagePaymentSlice.reducer;
