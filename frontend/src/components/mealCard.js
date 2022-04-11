@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 
 export default function MediaCard(props) {
   console.log(props);
@@ -17,22 +18,27 @@ export default function MediaCard(props) {
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {props.menu.day}
-        </Typography>
+        <Alert severity="success">
+          <Typography gutterBottom variant="h5" component="div">
+            {props.menu.day}
+          </Typography>
 
-        <Typography gutterBottom variant="h5" component="div">
-          Dish: {props.menu.dish}
-        </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            Dish: {props.menu.dish}
+          </Typography>
+        </Alert>
+
         <Typography variant="body2" color="text.secondary">
           This impressive biryani is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
           mussels, if you like.
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <CardActions sx={{ display: "flex", justifyContent: "end" }}>
+        {/* <Button size="small">Share</Button> */}
+        <Button size="small" color="error">
+          Cancel for today
+        </Button>
       </CardActions>
     </Card>
   );

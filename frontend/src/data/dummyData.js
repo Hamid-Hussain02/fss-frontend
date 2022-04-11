@@ -1,4 +1,11 @@
 import img from "../assets/images/food-2.jpeg";
+import img1 from "../assets/images/biryani.jpeg";
+import img2 from "../assets/images/paratha.jpeg";
+import img3 from "../assets/images/karahi.jpeg";
+import img4 from "../assets/images/kabab.jpeg";
+import img5 from "../assets/images/butter.jpeg";
+import img6 from "../assets/images/rice.jpeg";
+
 const menu = [
   {
     day: "Monday",
@@ -7,33 +14,33 @@ const menu = [
   },
   {
     day: "Tuesday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Karahi",
+    image: `${img3}`,
   },
   {
     day: "Wednesday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Paratha",
+    image: `${img2}`,
   },
   {
     day: "Thursday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Karahi",
+    image: `${img3}`,
   },
   {
     day: "Friday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Kabab",
+    image: `${img4}`,
   },
   {
     day: "Saturday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Butter ",
+    image: `${img5}`,
   },
   {
     day: "Sunday",
-    dish: "Biryani",
-    image: `${img}`,
+    dish: "Rice Cheicken",
+    image: `${img6}`,
   },
 ];
 
