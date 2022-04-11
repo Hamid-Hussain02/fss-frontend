@@ -73,7 +73,7 @@ const Login = () => {
   useEffect(() => {
     // console.log(loginResponse)
     if (loginResponse) {
-      navigate("/admin-dashboard");
+      navigate("/admin-dashboard/all-clients");
     }
   }, [loginResponse]);
 

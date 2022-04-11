@@ -9,6 +9,13 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import img from "../../assets/images/receipt-2.jpeg";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import { useDispatch } from "react-redux";
+import { updatePaymentStatus } from "../../store/slices/managePayments-slice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -50,15 +57,37 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    console.log("handlecose");
     setOpen(false);
   };
 
   console.log(props);
+
+  const getColor = (value) => {
+    console.log(value);
+    return value == "Approved"
+      ? "success"
+      : value == "Rejected"
+      ? "error"
+      : "warning";
+  };
+
+  //   React.useEffect(() => {
+  const updateStatus = (status) => {
+    console.log(status);
+    const paymentStatus = {
+      invoice_id: props.invoice.id,
+      payment_status: status,
+    };
+    dispatch(updatePaymentStatus(paymentStatus));
+  };
+  //   }, [dispatch]);
 
   return (
     <div>
@@ -74,15 +103,73 @@ export default function CustomizedDialogs(props) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Modal title
+          Payment Proof
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <img src={props.image} all="Payment Proof"></img>
+        <DialogContent sx={{ px: "auto" }}>
+          <img
+            src={img}
+            alt="Payment Proof"
+            style={{ width: "400px", height: "400px" }}
+          ></img>
+          <Box sx={{ mt: "10px" }}>
+            {/* Current Payment Status: {"  "} */}
+            {/* <Chip
+              label={props.invoice.payment_status}
+              color={getColor(props.invoice.payment_status)}
+            /> */}
+            {/* <Button
+              autoFocus
+              variant="contained"
+              size="small"
+              color="error"
+              disableElevation
+              color={getColor(props.invoice.payment_status)}
+            >
+              {props.invoice.payment_status}
+            </Button> */}
+            <Alert severity={getColor(props.invoice.payment_status)}>
+              <AlertTitle>{props.invoice.payment_status}</AlertTitle>
+              Payment Status is —{" "}
+              <strong>{props.invoice.payment_status}!</strong>
+            </Alert>
+          </Box>
         </DialogContent>
+
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
+          <Button
+            autoFocus
+            onClick={handleClose}
+            variant="contained"
+            size="small"
+            color="error"
+            disableElevation
+            onClick={() => updateStatus("Rejected")}
+          >
+            Reject
           </Button>
+
+          <Button
+            autoFocus
+            onClick={handleClose}
+            size="small"
+            color="success"
+            variant="contained"
+            disableElevation
+            onClick={() => updateStatus("Approved")}
+          >
+            Approve
+          </Button>
+
+          {/* <Chip
+            label="Reject"
+            disabled={props.invoice.payment_status !== "Pending"}
+            color="error"
+          />
+          <Chip
+            label="Approve"
+            disabled={props.invoice.payment_status !== "Pending"}
+            color="success"
+          /> */}
         </DialogActions>
       </BootstrapDialog>
     </div>

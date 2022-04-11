@@ -31,7 +31,7 @@ const columns = [
     align: "center",
     showProof: (value) => {
       console.log("jflsd", value);
-      return <PaymentProof image={value} />;
+      return <PaymentProof invoice={value} />;
     },
   },
   {
@@ -112,7 +112,7 @@ export default function StickyHeadTable() {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.showProof ? (
-                            column.showProof(value)
+                            column.showProof(invoice)
                           ) : column.label == "Payment Status" ? (
                             // <Button
                             //   variant="outlined"

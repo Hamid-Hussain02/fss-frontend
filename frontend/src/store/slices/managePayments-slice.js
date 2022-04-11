@@ -15,6 +15,20 @@ export const getAllInvoices = createAsyncThunk(
   }
 );
 
+export const updatePaymentStatus = createAsyncThunk(
+  "ManagePayments/updatePaymentStatus",
+  async (payload) => {
+    console.log("loginasync", payload);
+
+    const response = await customAxios.post(
+      `${process.env.REACT_APP_BASE_URL}invoice/update`,
+      { invoice_id: payload.invoice_id, payment_status: payload.payment_status }
+    );
+    console.log(response);
+    return response.data;
+  }
+);
+
 const initialState = {
   invoices: [],
   //   loginResponse: false,
@@ -43,6 +57,21 @@ const ManagePaymentSlice = createSlice({
       };
     },
     [getAllInvoices.rejected]: () => {
+      console.log("Rejected");
+    },
+
+    [updatePaymentStatus.pending]: () => {
+      console.log("Pending");
+    },
+    [updatePaymentStatus.fulfilled]: (state, { payload }) => {
+      console.log("Fetched Successfully", payload);
+
+      // return {
+      //   ...state,
+      //   invoices: payload,
+      // };
+    },
+    [updatePaymentStatus.rejected]: () => {
       console.log("Rejected");
     },
 
